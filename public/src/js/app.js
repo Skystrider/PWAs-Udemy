@@ -16,6 +16,7 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+if(false) {
 window.addEventListener('beforeinstallprompt', function(event) {
   console.log('beforeinstallprompt fired');
   event.preventDefault();
@@ -30,6 +31,7 @@ var promise = new Promise(function(resolve, reject) {
     //console.log('This is executed once the timer is done!');
   }, 3000);
 });
+
 
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'https://httpbin.org/ip');
@@ -94,3 +96,4 @@ promise.then(function(text) {
 });
 
 console.log('This is executed right after setTimeout()');
+}

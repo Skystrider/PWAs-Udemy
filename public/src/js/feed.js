@@ -80,32 +80,12 @@ function createCard() {
   sharedMomentsArea.appendChild(cardWrapper);
 }
 
-//TODO: refactor the below strategy to the sw.js fetch event handler - below can just be fetch + then with createCard()
 var url = 'https://httpbin.org/get';
-var networkDataReceived = false;
 fetch(url)
   .then(function(res) {
     return res.json();
   })
   .then(function(data) {
-    networkDataReceived = true;
-    console.log('From web', data);
-    clearCards();
     createCard();
   });
 
-if ('caches' in window) {
-  caches.match(url)
-    .then(function(response) {
-      if (response) {
-        return response.json();
-      }
-    })
-    .then(function(data) {
-      if (!networkDataReceived) {
-        console.log('From cache', data);
-        clearCards();
-        createCard();
-      }
-    });
-}
