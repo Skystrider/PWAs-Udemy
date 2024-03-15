@@ -1,1 +1,6 @@
 # PWAs-Udemy
+My sw.js is the piece that is unique - I think my caching strategy is the right strategy. I disagree with Max's caching code in the course. (debatable of course - teach me why I'm wrong!)
+
+My caching code will prefer fetching resources from the network, using the latest value to update the cached value if it already exists in the cache. Only if we fail to fetch from the network, then we try to obtain the resource from the cache. Browsers and ISPs already cache files so static JS/CSS resources that have been previously loaded should load very fast. I don't think user code needs to worry about caching except that since this is a PWA we want to still have those resources even when Offline. User code shouldn't worry about optimizing caching resources to be faster when we have a network connection (IMO). We don't want to run into future bugs where dynamic user data gets cached too long and doesn't update when the value on the server has been updated by a different client - apps tend to be highly dynamic and user driven esp when it comes to interacting with others on the internet.
+
+Note a small detail I did is; if a failed cache lookup was for an event.request.mode === 'navigate' then we respond with '/offline.html' - no need to use that value for failed lookups of other kinds of resources.
